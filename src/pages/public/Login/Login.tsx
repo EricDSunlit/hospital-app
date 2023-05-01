@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {
   Box,
   Center,
@@ -20,8 +20,9 @@ import CustomButton from "@/components/CustomButton/CustomButton"
 import { login } from "@/services/auth.service"
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
-import { createUser } from "@/redux/states/user.state"
-import { PRIVATE_ROUTES } from "@/routes"
+import { USER_KEY, createUser, resetUser } from "@/redux/states/user.state"
+import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "@/routes"
+import { clearLocalStorage } from "@/utils/local-storage.util"
 
 const Login: React.FC = () => {
   const size = useBreakpointValue({
@@ -65,6 +66,12 @@ const Login: React.FC = () => {
       console.log(error)
     }
   }
+
+  useEffect(() => {
+    clearLocalStorage(USER_KEY)
+    dispatch(resetUser())
+    navigate(`/${PUBLIC_ROUTES.LOGIN}`, { replace: true })
+  }, [dispatch, navigate])
 
   return (
     <Flex w="100vw" h="100vh">

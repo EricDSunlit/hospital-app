@@ -2,9 +2,10 @@ import { Suspense, lazy } from "react"
 import { BrowserRouter, Navigate, Route } from "react-router-dom"
 import { Provider } from "react-redux"
 
-import { PUBLIC_ROUTES } from "./routes"
+import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "./routes"
 import { RoutesWithNotFound } from "./components/RoutesWithNotFound"
 import store from "./redux/store"
+import AuthGuard from "./guards/auth.guard"
 
 const Login = lazy(() => import("./pages/public/Login/Login"))
 
@@ -18,10 +19,15 @@ function App() {
             <RoutesWithNotFound>
               <Route
                 path={PUBLIC_ROUTES.HOME}
-                element={<Navigate to={PUBLIC_ROUTES.LOGIN} />}
+                element={<Navigate to={PRIVATE_ROUTES.DASHBOARD} />}
               />
-              {/* TODO: CREATE LOGIN PAGE */}
               <Route path={PUBLIC_ROUTES.LOGIN} element={<Login />} />
+              <Route element={<AuthGuard />}>
+                <Route
+                  path={PRIVATE_ROUTES.DASHBOARD}
+                  element={<>Dashboard page</>}
+                />
+              </Route>
             </RoutesWithNotFound>
           </BrowserRouter>
         </Provider>
