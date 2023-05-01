@@ -1,34 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Suspense, lazy } from "react"
+import { BrowserRouter, Navigate, Route } from "react-router-dom"
+import { Provider } from "react-redux"
+
+import { PUBLIC_ROUTES } from "./routes"
+import { RoutesWithNotFound } from "./components/RoutesWithNotFound"
+import store from "./redux/store"
+
+const Login = lazy(() => import("./pages/public/Login/Login"))
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <main>
+      {/*TODO: CREATE LOADING PAGE */}
+      <Suspense fallback={<>Loading...</>}>
+        <Provider store={store}>
+          <BrowserRouter>
+            <RoutesWithNotFound>
+              <Route
+                path={PUBLIC_ROUTES.HOME}
+                element={<Navigate to={PUBLIC_ROUTES.LOGIN} />}
+              />
+              {/* TODO: CREATE LOGIN PAGE */}
+              <Route path={PUBLIC_ROUTES.LOGIN} element={<Login />} />
+            </RoutesWithNotFound>
+          </BrowserRouter>
+        </Provider>
+      </Suspense>
+    </main>
   )
 }
 
