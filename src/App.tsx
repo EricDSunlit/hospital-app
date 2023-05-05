@@ -6,6 +6,7 @@ import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "./routes"
 import { RoutesWithNotFound } from "./components/RoutesWithNotFound"
 import store from "./redux/store"
 import AuthGuard from "./guards/auth.guard"
+import { PrivateLayout } from "./components/PrivateLayout"
 
 const Login = lazy(() => import("./pages/public/Login/Login"))
 
@@ -25,7 +26,7 @@ function App() {
               <Route element={<AuthGuard />}>
                 <Route
                   path={PRIVATE_ROUTES.DASHBOARD}
-                  element={<>Dashboard page</>}
+                  element={<PrivateLayout>Dashboard page</PrivateLayout>}
                 />
               </Route>
             </RoutesWithNotFound>
