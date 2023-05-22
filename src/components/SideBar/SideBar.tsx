@@ -7,7 +7,7 @@ const SideBar: React.FC = () => {
       <Flex
         w="full"
         h={200}
-        max-maxHeight={200}
+        maxHeight={200}
         justifyContent="center"
         flexDirection="column"
       >

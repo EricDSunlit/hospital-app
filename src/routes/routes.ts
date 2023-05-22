@@ -5,5 +5,6 @@ export const PUBLIC_ROUTES = {
 }
 
 export const PRIVATE_ROUTES = {
-  DASHBOARD: "dashboard"
+  DASHBOARD: "dashboard",
+  INSTITUTIONS: "instituciones"
 }

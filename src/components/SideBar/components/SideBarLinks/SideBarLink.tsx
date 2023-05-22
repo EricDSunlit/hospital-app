@@ -23,7 +23,6 @@ const SideBarLink: React.FC<SideBarLinkProps> = ({ link }) => {
         <Accordion
           borderColor="transparent"
           color="white"
-          // fontFamily="sans-serif"
           borderRadius="lg"
           cursor="pointer"
           allowMultiple
@@ -47,6 +46,7 @@ const SideBarLink: React.FC<SideBarLinkProps> = ({ link }) => {
             <AccordionPanel pb={4}>
               {link.subLinks.map((sublink) => (
                 <ChakraLink
+                  key={sublink.description}
                   as={Link}
                   to={`/${sublink.to}`}
                   marginTop={5}

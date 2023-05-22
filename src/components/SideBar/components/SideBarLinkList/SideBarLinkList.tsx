@@ -5,8 +5,8 @@ import SideBarLink from "../SideBarLinks/SideBarLink"
 const SideBarLinkList: React.FC = () => {
   return (
     <Stack spacing="10px">
-      {ROUTES_LINKS.map((link) => (
-        <SideBarLink link={link} />
+      {ROUTES_LINKS.map((link, index) => (
+        <SideBarLink key={index} link={link} />
       ))}
     </Stack>
   )

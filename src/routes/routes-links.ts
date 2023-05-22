@@ -21,7 +21,7 @@ export const ROUTES_LINKS: RouteLink[] = [
   },
   {
     description: "Instituciones medicas",
-    to: "instituciones",
+    to: PRIVATE_ROUTES.INSTITUTIONS,
     icon: HiOutlineBuildingOffice2
   },
   {
@@ -51,12 +51,12 @@ export const ROUTES_LINKS: RouteLink[] = [
       },
       {
         description: "Roles",
-        to: PRIVATE_ROUTES.DASHBOARD,
+        to: "personal/roles",
         icon: HiOutlinePuzzlePiece
       },
       {
         description: "Permisos",
-        to: PRIVATE_ROUTES.DASHBOARD,
+        to: "personal/permisos",
         icon: HiOutlineKey
       }
     ]
